@@ -4,10 +4,11 @@ import { API_KEY } from "../env";
 
 const Main = () => {
   const [recipieObj, setRecipieObj] = useState();
+  const [ingredients, setIngredients] = useState(["apples", "flour", "sugar"]);
 
   useEffect(() => {
     fetch(
-      `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=apples,flour,sugar&ignorePantry=true&ranking=2`
+      `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=${ingredients}&ignorePantry=true&ranking=2`
     )
       .then((res) => res.json())
       .then((res) => {
