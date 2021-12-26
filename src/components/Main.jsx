@@ -7,7 +7,7 @@ const Main = () => {
 
   useEffect(() => {
     fetch(
-      `https://api.spoonacular.com/recipes/716429/information?apiKey=${API_KEY}&includeNutrition=true`
+      `https://api.spoonacular.com/recipes/findByIngredients?apiKey=${API_KEY}&ingredients=apples,flour,sugar&ignorePantry=true&ranking=2`
     )
       .then((res) => res.json())
       .then((res) => {
