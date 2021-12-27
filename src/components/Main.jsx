@@ -1,6 +1,8 @@
 import react, { useEffect, useState } from "react";
-
+// import IngredientForm from "./IngredientForm";
 import { API_KEY } from "../env";
+
+import FullRecipie from "./FullRecipie";
 
 const Main = () => {
   const [recipieObj, setRecipieObj] = useState();
@@ -98,7 +100,9 @@ const Main = () => {
       <h1>Recipe Finder</h1>
       <button id="edit-pantry">Edit Pantry</button>
       <button id="search-for-recipies">Search for recipies</button>
-      <p>{JSON.stringify(jsonResponse)}</p>
+      <FullRecipie recipie={jsonResponse} />
+      {/* <br /> */}
+      {/* <IngredientForm /> */}
     </main>
   );
 };
