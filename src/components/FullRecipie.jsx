@@ -1,10 +1,6 @@
 import React from "react";
 
-const FullRecipie = (recipie) => {
-  console.log("before: " + recipie);
-  console.log("item 0: " + recipie[0]);
-  const recipieID = recipie[0].id;
-  console.log("After: " + recipie);
+const FullRecipie = ({ recipieID, recipieImage, recipieTitle }) => {
   //GET https://api.spoonacular.com/recipes/{{RECIPIE_ID}}/information?apiKey=${API_KEY}&includeNutrition=true
   const recipieInfo = {
     vegetarian: false,
@@ -1761,23 +1757,25 @@ const FullRecipie = (recipie) => {
     winePairing: {
       pairedWines: ["malbec", "pinot noir", "sangiovese"],
       pairingText:
-        "Malbec, Pinot Noir, and Sangiovese are my top picks for Pork Tenderloin. Pinot noir's light body is great for lean cuts, medium bodied sangiovese complement meaty sauces, stews, and other multi-ingredient dishes, and full-bodied tannic malbec pairs with fatty cuts and barbecue. One wine you could try is Vinan Alicia Las Compuertas Malbec. It has 4.4 out of 5 stars and a bottle costs about 27 dollars.",
+        "Pork Tenderloin works really well with Malbec, Pinot Noir, and Sangiovese. Pinot noir's light body is great for lean cuts, medium bodied sangiovese complement meaty sauces, stews, and other multi-ingredient dishes, and full-bodied tannic malbec pairs with fatty cuts and barbecue. The Reginato Malbec rosé with a 4.8 out of 5 star rating seems like a good match. It costs about 17 dollars per bottle.",
       productMatches: [
         {
-          id: 463165,
-          title: "Vina Alicia Las Compuertas Malbec",
+          id: 455075,
+          title: "Reginato Malbec Rose",
           description:
-            "Intense red with purple highlights. An amazing combination between intensity and precision. Reveals a ripe fruit and sweet character of blackberry, plum and red fruit marmalade. It rounds off with elegant notes of pepper, bay and cinnamon. Intense black fruit, great amplitude and marked sucrosity. Stands out for its fine ripe and silky tannins and delivers an elegant and complex mouthfeel. Ageing will enhance the wine ´s complexity.Ideal to pair with fatty meat, game meat, spicy, slow cooked or grilled dishes.",
-          price: "$26.99",
-          imageUrl: "https://spoonacular.com/productImages/463165-312x231.jpg",
-          averageRating: 0.8800000000000001,
-          ratingCount: 8.0,
-          score: 0.8400000000000001,
-          link: "https://click.linksynergy.com/deeplink?id=*QCiIS6t4gA&mid=2025&murl=https%3A%2F%2Fwww.wine.com%2Fproduct%2Fvina-alicia-las-compuertas-malbec-2010%2F145299",
+            "Malbec seems an unlikely hero for a sparkling wine grape, but when you want your rosé to show some real color and character, then Malbec's your man. Crisp and dry with lovely strawberry, rhubarb flavors and aromas. Just a hint of tannin structure, floral spice, and an amazing elegant finish rounds out the mouth. It speaks of the rich Malbec grape, but never loses its light, refreshing nature. It will give you a good reason to drink sparkling wine with your main course!",
+          price: "$16.99",
+          imageUrl: "https://spoonacular.com/productImages/455075-312x231.jpg",
+          averageRating: 0.96,
+          ratingCount: 7.0,
+          score: 0.9145454545454546,
+          link: "https://click.linksynergy.com/deeplink?id=*QCiIS6t4gA&mid=2025&murl=https%3A%2F%2Fwww.wine.com%2Fproduct%2Freginato-malbec-rose%2F147678",
         },
       ],
     },
-    instructions: null,
+    // instructions: null,
+    instructions:
+      "Wow what awesome instructions! I totally didn't just hard-code these!<ol><li>Add the stuff</li><li>Do the stuff</li><li>Plate the stuff</li><li>Serve the stuff</li><li>Eat the stuff</li>",
     analyzedInstructions: [],
     originalId: null,
     spoonacularSourceUrl:
@@ -1786,19 +1784,33 @@ const FullRecipie = (recipie) => {
 
   return (
     <div id="recipie">
-      <img src={recipie[0].image} id="mainImage" />
-      <h2 id="recipieTitle">{recipie[0].title}</h2>
+      <img src={recipieImage} id="mainImage" />
+      <h2 id="recipieTitle">{recipieTitle}</h2>
       <p id="info">
         Time: {recipieInfo.readyInMinutes} Min. | Makes: {recipieInfo.servings}{" "}
-        Servings | From: {recipieInfo.sourceName} by: {recipieInfo.creditsText}
+        Servings | Diets: {recipieInfo.diets.join(", ")}
         <br />
-        Diets: {recipieInfo.diets} | {recipieInfo.dishTypes}
-        <br />
-        Extra Ingredients: {recipieInfo.extendedIngredients}
+        From: <a href={recipieInfo.sourceUrl}>
+          {recipieInfo.sourceName}
+        </a> by: {recipieInfo.creditsText}
       </p>
-      <p id="description">{recipieInfo.summary}</p>
+      <p
+        id="description"
+        dangerouslySetInnerHTML={{ __html: recipieInfo.summary }}
+      ></p>
       <hr />
-      <p id="instructions">{recipieInfo.instructions}</p>
+      {recipieInfo.instructions ? (
+        <p
+          id="instructions"
+          dangerouslySetInnerHTML={{ __html: recipieInfo.instructions }}
+        ></p>
+      ) : (
+        <p id="instructions">
+          The API doesn't have instructions avalible for this recipie, but you
+          might find them here:{" "}
+          <a href={recipieInfo.sourceUrl}>{recipieInfo.sourceUrl}</a>
+        </p>
+      )}
     </div>
   );
 };
