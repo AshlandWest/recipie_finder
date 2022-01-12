@@ -1,5 +1,4 @@
 import react, { useEffect, useState } from "react";
-// import IngredientForm from "./IngredientForm";
 import { API_KEY } from "../env";
 
 import FullRecipie from "./FullRecipie";
@@ -102,8 +101,6 @@ const Main = () => {
         recipieID={singleRecipe.id}
         recipieImage={singleRecipe.image}
       />
-      {/* <br /> */}
-      {/* <IngredientForm /> */}
     </main>
   );
 };
