@@ -1784,6 +1784,7 @@ const FullRecipie = ({ recipieID, recipieImage, recipieTitle }) => {
 
   return (
     <div id="recipie">
+      <h1>Recipe</h1>
       <img src={recipieImage} id="mainImage" />
       <h2 id="recipieTitle">{recipieTitle}</h2>
       <p id="info">

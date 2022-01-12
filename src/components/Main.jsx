@@ -1,7 +1,10 @@
 import react, { useEffect, useState } from "react";
 import { API_KEY } from "../env";
 
+import { Route, Routes } from "react-router-dom";
+
 import FullRecipie from "./FullRecipie";
+import EditPantry from "./EditPantry";
 
 const Main = () => {
   const [recipieObj, setRecipieObj] = useState();
@@ -93,14 +96,20 @@ const Main = () => {
 
   return (
     <main>
-      <h1>Recipe Finder</h1>
-      <button id="edit-pantry">Edit Pantry</button>
-      <button id="search-for-recipies">Search for recipies</button>
-      <FullRecipie
-        recipieTitle={singleRecipe.title}
-        recipieID={singleRecipe.id}
-        recipieImage={singleRecipe.image}
-      />
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <FullRecipie
+              recipieTitle={singleRecipe.title}
+              recipieID={singleRecipe.id}
+              recipieImage={singleRecipe.image}
+            />
+          }
+        />
+        <Route exact path="/EditPantry" element={<EditPantry />} />
+      </Routes>
     </main>
   );
 };

@@ -1,11 +1,14 @@
+import { BrowserRouter } from "react-router-dom";
 import Main from "./components/Main";
 import TopBar from "./components/TopBar";
 
 function App() {
   return (
     <div className="App">
-      <TopBar />
-      <Main />
+      <BrowserRouter>
+        <TopBar />
+        <Main />
+      </BrowserRouter>
     </div>
   );
 }
