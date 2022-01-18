@@ -23,6 +23,13 @@ const EditPantry = () => {
     }
   };
 
+  const removeItem = (item) => {
+    const output = [...storage];
+    const itemIndex = output.indexOf(item);
+    output.splice(itemIndex);
+    setStorage(output);
+  };
+
   useEffect(() => {
     localStorage.setItem("ingredients", JSON.stringify(storage));
   }, [storage]);
@@ -30,7 +37,7 @@ const EditPantry = () => {
   return (
     <div id="edit-pantry">
       <h1>Edit Pantry</h1>
-      <TextField id="ingrdntField" label="Standard" variant="standard" />
+      <TextField id="ingrdntField" label="Add Ingredient" variant="standard" />
       <br />
       <button id="addItemButton" onClick={addItem}>
         Add Item
