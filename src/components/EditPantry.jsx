@@ -24,9 +24,10 @@ const EditPantry = () => {
   };
 
   const removeItem = (item) => {
+    console.log(`removing ${item}`);
     const output = [...storage];
     const itemIndex = output.indexOf(item);
-    output.splice(itemIndex);
+    output.splice(itemIndex, 1);
     setStorage(output);
   };
 
@@ -58,31 +59,29 @@ const EditPantry = () => {
         }}
         subheader={<li />}
       >
-        <li key={`section-staples`}>
-          <ListItem key={`Staple Placeholder`}>
-            <ListItemText primary={`Staples`} />
-          </ListItem>
-        </li>
+        <ListItem key={`Staple Placeholder`}>
+          <ListItemText primary={`Staples`} />
+        </ListItem>
 
-        {
-          <li key={`section-pantryItems`}>
-            <ul>
-              <ListSubheader>{`Pantry Items`}</ListSubheader>
-              {storage.map((item) => (
-                <ListItem
-                  key={`item-pantryItems-${item}`}
-                  secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon />
-                    </IconButton>
-                  }
-                >
-                  <ListItemText primary={item} />
-                </ListItem>
-              ))}
-            </ul>
-          </li>
-        }
+        <ListSubheader>{`Pantry Items`}</ListSubheader>
+        {storage.map((item) => (
+          <ListItem
+            key={`item-pantryItems-${item}`}
+            secondaryAction={
+              <IconButton
+                edge="end"
+                aria-label="delete"
+                onClick={() => {
+                  removeItem(item);
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
+            }
+          >
+            <ListItemText primary={item} />
+          </ListItem>
+        ))}
       </List>
     </div>
   );
