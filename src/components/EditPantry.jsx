@@ -5,6 +5,8 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
+import { IconButton } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const EditPantry = () => {
   const oldStorage = localStorage.getItem("ingredients")
@@ -61,7 +63,14 @@ const EditPantry = () => {
             <ul>
               <ListSubheader>{`Pantry Items`}</ListSubheader>
               {storage.map((item) => (
-                <ListItem key={`item-pantryItems-${item}`}>
+                <ListItem
+                  key={`item-pantryItems-${item}`}
+                  secondaryAction={
+                    <IconButton edge="end" aria-label="delete">
+                      <DeleteIcon className="deleteIcon" />
+                    </IconButton>
+                  }
+                >
                   <ListItemText primary={item} />
                 </ListItem>
               ))}
