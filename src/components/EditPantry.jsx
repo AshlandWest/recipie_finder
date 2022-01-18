@@ -12,7 +12,6 @@ const EditPantry = () => {
   const oldStorage = localStorage.getItem("ingredients")
     ? JSON.parse(localStorage.getItem("ingredients"))
     : [];
-  console.log(oldStorage);
   const [storage, setStorage] = useState(oldStorage);
 
   const addItem = () => {
@@ -67,7 +66,7 @@ const EditPantry = () => {
                   key={`item-pantryItems-${item}`}
                   secondaryAction={
                     <IconButton edge="end" aria-label="delete">
-                      <DeleteIcon className="deleteIcon" />
+                      <DeleteIcon />
                     </IconButton>
                   }
                 >
