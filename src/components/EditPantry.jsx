@@ -1,4 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { TextField } from "@mui/material";
+
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
 
 const EditPantry = () => {
   const oldStorage = localStorage.getItem("ingredients")
@@ -23,16 +29,46 @@ const EditPantry = () => {
   return (
     <div id="edit-pantry">
       <h1>Edit Pantry</h1>
-      <fieldset>
-        <legend>Ingredients</legend>
-        <input type="text" id="ingrdntField" />
-        <br />
-        <button id="addItemButton" onClick={addItem}>
-          Add Item
-        </button>
-      </fieldset>
+      <TextField id="ingrdntField" label="Standard" variant="standard" />
+      <br />
+      <button id="addItemButton" onClick={addItem}>
+        Add Item
+      </button>
 
-      <div>{storage.join(", ")}</div>
+      <List
+        sx={{
+          width: "100%",
+          maxWidth: 360,
+          // bgcolor: "background.paper",
+          position: "relative",
+          overflow: "auto",
+          maxHeight: 300,
+          "& ul": { padding: 0 },
+          margin: "auto",
+          marginTop: 3,
+          border: 1,
+        }}
+        subheader={<li />}
+      >
+        <li key={`section-staples`}>
+          <ListItem key={`Staple Placeholder`}>
+            <ListItemText primary={`Staples`} />
+          </ListItem>
+        </li>
+
+        {
+          <li key={`section-pantryItems`}>
+            <ul>
+              <ListSubheader>{`Pantry Items`}</ListSubheader>
+              {storage.map((item) => (
+                <ListItem key={`item-pantryItems-${item}`}>
+                  <ListItemText primary={item} />
+                </ListItem>
+              ))}
+            </ul>
+          </li>
+        }
+      </List>
     </div>
   );
 };
