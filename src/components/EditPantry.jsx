@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { TextField } from "@mui/material";
 
+import { Collapse } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
@@ -23,12 +24,27 @@ const EditPantry = () => {
     }
   };
 
+  const [open, setOpen] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  // silly cabage code
+  const [cabageDisplay, setCabageDisplay] = useState("none");
+
   const removeItem = (item) => {
-    console.log(`removing ${item}`);
     const output = [...storage];
     const itemIndex = output.indexOf(item);
     output.splice(itemIndex, 1);
     setStorage(output);
+
+    if (item.toUpperCase() === "CABBAGES" || item.toUpperCase() === "CABBAGE") {
+      setCabageDisplay("block");
+      setTimeout(() => {
+        setCabageDisplay("none");
+      }, 2000);
+    }
   };
 
   useEffect(() => {
@@ -38,6 +54,28 @@ const EditPantry = () => {
   return (
     <div id="edit-pantry">
       <h1>Edit Pantry</h1>
+      {/* start silly image */}
+      <div
+        id="myModal"
+        className="modal"
+        style={{
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          zIndex: 2,
+          display: cabageDisplay,
+        }}
+      >
+        <img
+          className="modal-content"
+          id="img01"
+          style={{ width: "100%" }}
+          src="https://c.tenor.com/j7S0OXAe8fEAAAAC/avatar-cabbages.gif"
+        />
+        <div id="caption"></div>
+      </div>
+      {/* end silly image  */}
       <TextField id="ingrdntField" label="Add Ingredient" variant="standard" />
       <br />
       <button id="addItemButton" onClick={addItem}>
@@ -59,10 +97,6 @@ const EditPantry = () => {
         }}
         subheader={<li />}
       >
-        <ListItem key={`Staple Placeholder`}>
-          <ListItemText primary={`Staples`} />
-        </ListItem>
-
         <ListSubheader>{`Pantry Items`}</ListSubheader>
         {storage.map((item) => (
           <ListItem
@@ -83,6 +117,10 @@ const EditPantry = () => {
           </ListItem>
         ))}
       </List>
+      <p>
+        Pantry staples, such as flour and sugar, are assumed to be present and
+        do not need to be added to this list.
+      </p>
     </div>
   );
 };
