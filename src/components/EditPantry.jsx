@@ -24,12 +24,6 @@ const EditPantry = () => {
     }
   };
 
-  const [open, setOpen] = useState(false);
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
-
   // silly cabage code
   const [cabageDisplay, setCabageDisplay] = useState("none");
 
